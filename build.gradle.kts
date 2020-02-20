@@ -35,7 +35,14 @@ tasks {
     }
 
     val generateOutputs = register<JavaExec>("generateOutputs") {
-        args("inputs/num1.in")
+        val files = files(
+            "inputs/a_example.txt",
+            "inputs/b_read_on.txt",
+            "inputs/c_incunabula.txt",
+            "inputs/d_tough_choices.txt",
+            "inputs/e_so_many_books.txt",
+            "inputs/f_libraries_of_the_world.txt")
+        args(files)
         description = "Hashcode output generation"
         classpath = sourceSets["main"].runtimeClasspath
         main = application.mainClassName

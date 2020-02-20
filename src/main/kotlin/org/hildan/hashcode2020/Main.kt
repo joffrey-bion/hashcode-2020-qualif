@@ -12,7 +12,23 @@ fun main(files: Array<String>) = runBlocking {
 }
 
 fun HCReader.readProblem(): Problem {
-    val N = readInt()
-    val list = List(N) { readInt() }
-    return Problem(list)
+    val nBooks = readInt()
+    val nLibraries = readInt()
+    val nDays = readInt()
+    val bookScores = IntArray(nBooks) { readInt() }
+    val libraries = List(nLibraries) { id -> readLibrary(id) }.filter { it.signUpDays < nDays }
+    return Problem(
+        nBooks = nBooks,
+        nDays = nDays,
+        bookScores = bookScores,
+        libraries = libraries
+    )
+}
+
+fun HCReader.readLibrary(id: Int): Library {
+    val nBooks = readInt()
+    val signUpDays = readInt()
+    val booksPerDay = readInt()
+    val books = List(nBooks) { readInt() }.toSet()
+    return Library(id, signUpDays, booksPerDay, books)
 }
